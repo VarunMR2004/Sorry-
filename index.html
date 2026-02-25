@@ -17,9 +17,10 @@ font-family:'Poppins',sans-serif;
 
 body{
 overflow:hidden;
+height:100vh;
 }
 
-/* COMMON PAGE */
+/* PAGE */
 .page{
 position:absolute;
 width:100%;
@@ -33,7 +34,6 @@ transition:opacity 0.8s ease;
 padding:20px;
 }
 
-/* PAGE 1 */
 #page1{
 background:linear-gradient(135deg,#ffd6ec,#e0c3fc);
 }
@@ -49,13 +49,7 @@ margin-top:15px;
 font-size:1.2rem;
 }
 
-.buttons{
-position:relative;
-margin-top:50px;
-width:320px;
-height:150px;
-}
-
+/* BUTTONS */
 button{
 position:absolute;
 padding:15px 35px;
@@ -69,8 +63,8 @@ transition:0.2s ease;
 #yesBtn{
 background:#ff4da6;
 color:white;
-left:30px;
-top:60px;
+bottom:25%;
+left:40%;
 }
 
 #yesBtn:hover{
@@ -80,11 +74,11 @@ transform:scale(1.1);
 #noBtn{
 background:#888;
 color:white;
-right:30px;
-top:60px;
+bottom:25%;
+left:55%;
 }
 
-/* LOADING SCREEN */
+/* LOADING */
 #loadingScreen{
 background:black;
 color:white;
@@ -145,10 +139,8 @@ animation:fall 3s linear forwards;
 <h1>We are sorryyyyy Sarayuuuuuuuuuuu 💖🥺</h1>
 <p>I believe you have forgiven us!!!!</p>
 
-<div class="buttons">
 <button id="yesBtn">YES 💕</button>
 <button id="noBtn">NO 😤</button>
-</div>
 </div>
 
 <!-- LOADING -->
@@ -168,14 +160,11 @@ const yesBtn = document.getElementById("yesBtn");
 const page1 = document.getElementById("page1");
 const page2 = document.getElementById("page2");
 const loading = document.getElementById("loadingScreen");
-const buttonArea = document.querySelector(".buttons");
 
-/* Keep NO inside container and escape from mouse */
-buttonArea.addEventListener("mousemove", (e) => {
+/* FULL PAGE ESCAPE */
+document.addEventListener("mousemove", (e) => {
 
     const rect = noBtn.getBoundingClientRect();
-    const areaRect = buttonArea.getBoundingClientRect();
-
     const mouseX = e.clientX;
     const mouseY = e.clientY;
 
@@ -184,10 +173,10 @@ buttonArea.addEventListener("mousemove", (e) => {
 
     const distance = Math.hypot(mouseX - btnCenterX, mouseY - btnCenterY);
 
-    if (distance < 100) {
+    if (distance < 120) {
 
-        const maxX = areaRect.width - rect.width;
-        const maxY = areaRect.height - rect.height;
+        const maxX = window.innerWidth - rect.width;
+        const maxY = window.innerHeight - rect.height;
 
         let newX = Math.random() * maxX;
         let newY = Math.random() * maxY;
