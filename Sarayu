@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorry Sarayuu 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow: hidden;
+    transition: background 1s ease;
+}
+
+/* PAGE CONTAINER */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    transition: opacity 0.8s ease;
+}
+
+/* PAGE 1 */
+#page1 {
+    background: linear-gradient(135deg, #ffd6ec, #e0c3fc);
+}
+
+h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    animation: glow 2s infinite alternate;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+.buttons {
+    margin-top: 30px;
+    position: relative;
+}
+
+button {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: #ff69b4;
+    color: white;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background: #aaa;
+    color: white;
+    position: absolute;
+}
+
+/* PAGE 2 */
+#page2 {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Glow animation */
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff99cc; }
+    to { text-shadow: 0 0 25px #ff3399; }
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); }
+    100% { transform: translateY(-10vh); }
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: red;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+    <h1>We are sorryyyyy Sarayuuuuuuuuuuu 💖🥺</h1>
+    <p>I believe you have forgiven us!!!!</p>
+    <div class="buttons">
+        <button id="yesBtn">YES 💕</button>
+        <button id="noBtn">NO 😤</button>
+    </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <h1>We knew it, you will forgive us!!!! 😭💗</h1>
+    <p>You're the best and we love you forever 💕</p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+
+/* Make NO escape */
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+/* YES clicked */
+yesBtn.addEventListener("click", () => {
+    page1.style.opacity = "0";
+    page1.style.pointerEvents = "none";
+    page2.style.opacity = "1";
+    page2.style.pointerEvents = "all";
+
+    createConfetti();
+    createHearts();
+});
+
+/* Confetti */
+function createConfetti() {
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = 
+            ["#ff0","#ff69b4","#00f","#0f0","#f00"][Math.floor(Math.random()*5)];
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+/* Floating hearts */
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+    }, 500);
+}
+</script>
+
+</body>
+</html>
